@@ -1,0 +1,19 @@
+import 'package:flutter/material.dart';
+
+class NavigationService {
+  static final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
+  static Future<dynamic> navigateTo(String routeName, {dynamic arguments}) {
+    return navigatorKey.currentState!.pushNamed(routeName, arguments: arguments);
+  }
+
+  static void goBack() {
+    if (navigatorKey.currentState!.canPop()) {
+      navigatorKey.currentState!.pop();
+    }
+  }
+
+  static Future<dynamic> navigateWithReplacement(String routeName, {dynamic arguments}) {
+    return navigatorKey.currentState!.pushReplacementNamed(routeName, arguments: arguments);
+  }
+}
