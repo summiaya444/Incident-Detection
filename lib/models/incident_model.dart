@@ -9,6 +9,8 @@ class Incident {
   final int similarIncidents;
   final bool? accepted;
   final String? assignedTo;
+  final String? priority; // Add this
+  final String? description; //
 
   Incident({
     required this.id,
@@ -20,19 +22,22 @@ class Incident {
     this.similarIncidents = 0,
     this.accepted,
     this.assignedTo,
+    this.priority,
+    this.description,
   });
 
-  Incident copyWith({
-    String? id,
-    String? imageUrl,
-    String? location,
-    DateTime? time,
-    String? department,
-    String? status,
-    int? similarIncidents,
-    bool? accepted,
-    String? assignedTo,
-  }) {
+  Incident copyWith(
+      {String? id,
+      String? imageUrl,
+      String? location,
+      DateTime? time,
+      String? department,
+      String? status,
+      int? similarIncidents,
+      bool? accepted,
+      String? assignedTo,
+      String? priority,
+      String? description}) {
     return Incident(
       id: id ?? this.id,
       imageUrl: imageUrl ?? this.imageUrl,
@@ -43,6 +48,8 @@ class Incident {
       similarIncidents: similarIncidents ?? this.similarIncidents,
       accepted: accepted ?? this.accepted,
       assignedTo: assignedTo ?? this.assignedTo,
+      priority: priority ?? this.priority,
+      description: description ?? this.description,
     );
   }
 }

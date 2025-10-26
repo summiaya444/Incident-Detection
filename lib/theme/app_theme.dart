@@ -3,18 +3,17 @@ import 'package:flutter/services.dart';
 
 class AppTheme {
   static final lightTheme = ThemeData(
-    primarySwatch: Colors.indigo,
+    primarySwatch: Colors.blue,
     colorScheme: ColorScheme.light(
-      primary: Colors.indigo.shade700,
-      secondary: Colors.teal.shade300,
+      primary: Colors.red.shade700,
+      secondary: Colors.red.shade400,
       surface: Colors.white,
-      background: const Color(0xFFF5F5F5),
       onPrimary: Colors.white,
       onSecondary: Colors.white,
     ),
-    scaffoldBackgroundColor: const Color(0xFFF5F5F5),
+    scaffoldBackgroundColor: const Color(0xFFF9FAFB),
     appBarTheme: AppBarTheme(
-      backgroundColor: Colors.indigo.shade700,
+      backgroundColor: Colors.red.shade700,
       elevation: 0,
       iconTheme: const IconThemeData(color: Colors.white),
       titleTextStyle: const TextStyle(
@@ -30,7 +29,7 @@ class AppTheme {
       ),
     ),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
-      backgroundColor: Colors.indigo.shade700,
+      backgroundColor: Colors.green.shade500,
       elevation: 4,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
@@ -75,7 +74,7 @@ class AppTheme {
       ),
     ),
     cardTheme: CardThemeData(
-      elevation: 2,
+      elevation: 3,
       margin: const EdgeInsets.all(8),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
@@ -98,28 +97,22 @@ class AppTheme {
         fontFamily: 'OpenSans',
       ),
     ),
-    buttonTheme: ButtonThemeData(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
-      buttonColor: Colors.indigo.shade700,
-    ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.indigo.shade700,
+        backgroundColor: Colors.red,
         padding: const EdgeInsets.symmetric(vertical: 16),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
         ),
         textStyle: const TextStyle(
-          fontFamily: 'Poppins',
-          fontWeight: FontWeight.w600,
-        ),
+            fontFamily: 'Poppins',
+            fontWeight: FontWeight.w600,
+            color: Colors.white),
       ),
     ),
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
-        foregroundColor: Colors.indigo.shade700,
+        foregroundColor: Colors.blue.shade700,
         textStyle: const TextStyle(
           fontFamily: 'Poppins',
           fontWeight: FontWeight.w600,
@@ -140,12 +133,11 @@ class AppTheme {
   );
 
   static final darkTheme = ThemeData(
-    primarySwatch: Colors.indigo,
+    primarySwatch: Colors.blue,
     colorScheme: const ColorScheme.dark(
-      primary: Colors.indigo,
-      secondary: Colors.teal,
+      primary: Colors.blue,
+      secondary: Colors.orange,
       surface: Color(0xFF1E1E1E),
-      background: Color(0xFF121212),
       onPrimary: Colors.white,
       onSecondary: Colors.white,
     ),
@@ -167,7 +159,7 @@ class AppTheme {
       ),
     ),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
-      backgroundColor: Colors.indigo,
+      backgroundColor: Colors.green.shade500,
       elevation: 4,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
@@ -235,28 +227,22 @@ class AppTheme {
         fontFamily: 'OpenSans',
       ),
     ),
-    buttonTheme: ButtonThemeData(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
-      buttonColor: Colors.indigo,
-    ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.indigo,
+        backgroundColor: Colors.red.shade700,
         padding: const EdgeInsets.symmetric(vertical: 16),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
         ),
         textStyle: const TextStyle(
-          fontFamily: 'Poppins',
-          fontWeight: FontWeight.w600,
-        ),
+            fontFamily: 'Poppins',
+            fontWeight: FontWeight.w600,
+            color: Colors.white),
       ),
     ),
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
-        foregroundColor: Colors.indigo.shade300,
+        foregroundColor: Colors.blue.shade300,
         textStyle: const TextStyle(
           fontFamily: 'Poppins',
           fontWeight: FontWeight.w600,

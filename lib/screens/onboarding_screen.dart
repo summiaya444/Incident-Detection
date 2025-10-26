@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:incident_reporting_app/screens/auth/login_screen.dart';
+import 'package:incident_reporting_app/screens/role_selection_screen.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:incident_reporting_app/constants/route_names.dart';
 import 'package:incident_reporting_app/services/navigation_service.dart';
@@ -20,20 +21,23 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   final List<Map<String, dynamic>> onboardingData = [
     {
       'title': 'Report Emergencies',
-      'description': 'Quickly report any emergency situation with photos and location data',
-      'image': 'assets/onboarding1.png',
+      'description':
+          'Quickly report any emergency situation with photos and location data',
+      'image': 'assets/images/onboard_1.png',
       'color': Colors.blue,
     },
     {
       'title': 'Real-time Tracking',
-      'description': 'Track emergency response teams in real-time as they come to assist',
-      'image': 'assets/onboarding2.png',
+      'description':
+          'Track emergency response teams in real-time as they come to assist',
+      'image': 'assets/images/onboard_2.png',
       'color': Colors.green,
     },
     {
       'title': 'Multiple Departments',
-      'description': 'Connect with police, fire, medical, and other emergency services',
-      'image': 'assets/onboarding3.png',
+      'description':
+          'Connect with police, fire, medical, and other emergency services',
+      'image': 'assets/images/onboard_3.png',
       'color': Colors.orange,
     },
   ];
@@ -60,7 +64,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               );
             },
           ),
-          
           Positioned(
             bottom: 40,
             left: 0,
@@ -92,7 +95,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       ),
                     ),
                     onPressed: () {
-                      NavigationService.navigateWithReplacement(RouteNames.login);
+                      NavigationService.navigateWithReplacement(
+                          RouteNames.login);
                     },
                     child: const Text(
                       'Get Started',
@@ -102,10 +106,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         color: Colors.white,
                       ),
                     ),
-                  )
-                    .animate()
-                    .fadeIn(duration: 500.ms)
-                    .scale(),
+                  ).animate().fadeIn(duration: 500.ms).scale(),
                 if (_currentPage != onboardingData.length - 1)
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -115,7 +116,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const LoginScreen(),
+                              builder: (context) => RoleSelectionScreen(),
                             ),
                           );
                         },
@@ -202,19 +203,13 @@ class OnboardingPage extends StatelessWidget {
                     color: Theme.of(context).colorScheme.primary,
                   ),
               textAlign: TextAlign.center,
-            )
-                .animate()
-                .fadeIn(duration: 500.ms)
-                .slideY(begin: 0.5, end: 0),
+            ).animate().fadeIn(duration: 500.ms).slideY(begin: 0.5, end: 0),
             const SizedBox(height: 16),
             Text(
               description,
               style: Theme.of(context).textTheme.bodyLarge,
               textAlign: TextAlign.center,
-            )
-                .animate()
-                .fadeIn(duration: 500.ms)
-                .slideY(begin: 0.5, end: 0),
+            ).animate().fadeIn(duration: 500.ms).slideY(begin: 0.5, end: 0),
           ],
         ),
       ),

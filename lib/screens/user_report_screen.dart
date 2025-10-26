@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'dart:io';
@@ -29,6 +30,73 @@ class _UserReportScreenState extends State<UserReportScreen> {
     "Medical Emergency"
   ];
   bool _isLoading = false;
+  StreamSubscription<Position>? _positionStream;
+
+
+  Future<void> _getLocation() async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      setState(() {
+        _location = 'Location services are disabled.';
+        _isLoading = false;
+      });
+      return;
+    }
+
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        setState(() {
+          _location = 'Location permissions are denied';
+          _isLoading = false;
+        });
+        return;
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      setState(() {
+        _location =
+        'Location permissions are permanently denied. Please enable in settings.';
+        _isLoading = false;
+      });
+      return;
+    }
+
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+
+    setState(() {
+      _location = '${position.latitude}, ${position.longitude}';
+      _isLoading = false;
+    });
+  }
+
+  void _startLocationUpdates() {
+    _positionStream = Geolocator.getPositionStream(
+      locationSettings: const LocationSettings(
+        accuracy: LocationAccuracy.high,
+        distanceFilter: 10,
+      ),
+    ).listen((Position position) {
+      setState(() {
+        _location = '${position.latitude}, ${position.longitude}';
+      });
+    });
+  }
+
+  void _stopLocationUpdates() {
+    _positionStream?.cancel();
+  }
+
 
   Future<void> _getImage() async {
     try {
@@ -98,22 +166,20 @@ class _UserReportScreenState extends State<UserReportScreen> {
     }
   }
 
-  Future<void> _getLocation() async {
-    setState(() {
-      _isLoading = true;
-    });
-    await Future.delayed(const Duration(seconds: 1));
-    setState(() {
-      _location = "24.8607° N, 67.0011° E";
-      _isLoading = false;
-    });
-  }
+
 
   @override
   void initState() {
     super.initState();
-    _getLocation();
+    _getLocation();         // Immediate location fetch
+    _startLocationUpdates();  }
+
+  @override
+  void dispose() {
+    _stopLocationUpdates();
+    super.dispose();
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -265,13 +331,6 @@ class _UserReportScreenState extends State<UserReportScreen> {
             ),
             const SizedBox(height: 20),
             ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(vertical: 16),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                backgroundColor: Theme.of(context).primaryColor,
-              ),
               onPressed: () {
                 if (_image == null) {
                   ScaffoldMessenger.of(context).showSnackBar(
@@ -285,8 +344,7 @@ class _UserReportScreenState extends State<UserReportScreen> {
                 _showSubmissionDialog();
               },
               child: const Text(
-                'SUBMIT REPORT',
-                style: TextStyle(fontSize: 18),
+                'Submit Report',style: TextStyle(color: Colors.white),
               ),
             ),
           ],

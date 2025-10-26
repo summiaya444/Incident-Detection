@@ -49,7 +49,7 @@ class _MyAppState extends State<MyApp> {
       theme: isDarkMode ? AppTheme.darkTheme : AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
-      localizationsDelegates: [
+      localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
@@ -57,14 +57,15 @@ class _MyAppState extends State<MyApp> {
       supportedLocales: const [Locale('en', 'US')],
       initialRoute: RouteNames.onboarding,
       routes: {
-        RouteNames.onboarding: (context) => OnboardingScreen(toggleTheme: toggleTheme),
-        RouteNames.login: (context) => const LoginScreen(),
+        RouteNames.onboarding: (context) =>
+            OnboardingScreen(toggleTheme: toggleTheme),
+        RouteNames.login: (context) => LoginScreen(),
         RouteNames.register: (context) => const RegisterScreen(),
         RouteNames.roleSelection: (context) => const RoleSelectionScreen(),
         RouteNames.adminDashboard: (context) => const AdminDashboard(),
-        RouteNames.departmentScreen: (context) => const DepartmentScreen(),
+        RouteNames.departmentScreen: (context) => const DepartmentDashboard(),
         RouteNames.driverScreen: (context) => const DriverScreen(),
-        RouteNames.hospitalScreen: (context) => const HospitalScreen(),
+        RouteNames.hospitalScreen: (context) => const MainHospitalScreen(),
         RouteNames.superAdminScreen: (context) => const SuperAdminScreen(),
         RouteNames.userReportScreen: (context) => const UserReportScreen(),
       },
